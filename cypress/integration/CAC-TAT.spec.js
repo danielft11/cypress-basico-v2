@@ -1,12 +1,5 @@
 /// <reference types="Cypress" />
 
-/*
-* Neste código estamos criando uma estrutura básica de uma suíte de testes.
-* Na linha 1 acima estamos referenciando o Cypress para obtermos o intelli-sense.
-* Na linha 10 estamos usando o método cy.visit para visitar a página index.html local.
-* Na linha 13 estamos usando o método cy.title para buscar o título da aplicação e encadeamos com o método .should
-* para verificar se o título da aplicação é igual a 'Central de Atendimento ao Cliente TAT' 
-*/
 describe('Central de Atendimento ao Cliente TAT', function() {
 
     beforeEach(function() {
@@ -26,7 +19,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('input[name="lastName"]').type('Fernando')
         cy.get('#email').type('danielft11@hotmail.com')
         cy.get('textarea[name="open-text-area"]').type(longText, {delay: 0})
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.success').should('be.visible')
     })
 
@@ -35,7 +28,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('input[name="lastName"]').type('Fernando')
         cy.get('#email').type('danielft11#hotmailcom')
         cy.get('textarea[name="open-text-area"]').type('Teste muito top!', {delay: 0})
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
 
@@ -51,7 +44,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('danielft11@hotmail.com')
         cy.get('#phone-checkbox').click() //setei o telefone como obrigatório mas não digitei nada no campo.
         cy.get('textarea[name="open-text-area"]').type('Teste muito top!', {delay: 0})
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
 
@@ -83,7 +76,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
 
